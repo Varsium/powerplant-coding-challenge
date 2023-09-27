@@ -9,5 +9,5 @@ namespace Engie.Application.ProductionPlan
          [property: JsonPropertyName("load")] int Load,
          [property: JsonPropertyName("fuels")] Fuel Fuels,
          [property: JsonPropertyName("powerplants")] IReadOnlyList<Powerplant> Powerplants
-     ) : IRequest<IReadOnlyCollection<ProductionResponse>>;
+     ) : IRequest<List<ProductionResponse>>;
 }
