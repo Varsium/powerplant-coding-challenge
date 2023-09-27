@@ -10,6 +10,7 @@ namespace coding_challenge
             _logger = logger;
         }
 
+        //TODO FINE TUNE THE MIDDLEWARE!
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             try
@@ -21,6 +22,7 @@ namespace coding_challenge
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 //Todo Write body object of why it failed.
                 _logger.LogError(exc, "This was thrown in the validationMiddleWare");
+                return;
             }
             catch (Exception ex)
             {
