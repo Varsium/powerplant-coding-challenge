@@ -1,3 +1,4 @@
+using coding_challenge;
 using Engie.Application;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
+builder.Services.AddScoped<ValidationMiddleware>(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,7 +21,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<ValidationMiddleware>();
 app.MapControllers();
 
 app.Run();
