@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["coding-challenge.csproj", "."]
-RUN dotnet restore "./coding-challenge.csproj"
+COPY ["Engie.Api.csproj", "."]
+RUN dotnet restore "./Engie.Api.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "coding-challenge.csproj" -c Release -o /app/build
+RUN dotnet build "Engie.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "coding-challenge.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Engie.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "coding-challenge.dll"]
+ENTRYPOINT ["dotnet", "Engie.Api.dll"]
