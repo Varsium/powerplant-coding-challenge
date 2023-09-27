@@ -1,12 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using Engie.Infrastructure.Enums;
+using System.Text.Json.Serialization;
 
 namespace Engie.Infrastructure.Models
 {
-    public record Powerplant(
+    public sealed record Powerplant(
       [property: JsonPropertyName("name")] string Name,
-      [property: JsonPropertyName("type")] string Type,
+      [property: JsonPropertyName("type")][property: JsonConverter(typeof(JsonStringEnumConverter))] EResourceType Type,
       [property: JsonPropertyName("efficiency")] double Efficiency,
       [property: JsonPropertyName("pmin")] int Pmin,
-      [property: JsonPropertyName("pmax")] int Pmax
+      [property: JsonPropertyName("pmax")]  int Pmax
   );
 }
